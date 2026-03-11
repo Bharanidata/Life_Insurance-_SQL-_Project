@@ -1,0 +1,74 @@
+create table customer( customer_id INT,
+customer_Name VARCHAR(50),
+Age INT,
+City VARCHAR(50));
+
+Create table policies (
+policy_id INT,
+policy_Name VARCHAR(50),
+premium_amount INT,
+Policy_type VARCHAR(50));
+
+
+
+
+insert into customer values (1,'Bharani',28,'salem');
+insert into customer values (2,'Anand',34,'Palakkad');
+insert into customer values (3,'Vishnu',31,'palakkad');
+insert into customer values (4,'Ujwal',26,'chennai');
+insert into customer values (5,'sanjay',27,'Ooty');
+insert into customer values (6,'Vipin',26,'coimbatore');
+insert into customer values (7,'Mohan',28,'madurai');
+
+select * from Customer order by customer_id 
+
+insert into policies values(1012345,'Life Insurance',15000,'Life'); 
+insert into policies values(1012346,'Health Insurance',10000,'Health');
+insert into policies values(1012347,'Life Insurance',15000,'Life');
+insert into policies values(1012348,'family Insurance',25000,'family');
+insert into policies values(1012349,'Life Insurance',15000,'Life');
+insert into policies values(1012340,'Life Insurance',15000,'Life');
+insert into policies values(1012341,'Health Insurance',10000,'Health');
+
+select * from policies ;
+
+
+SELECT customer.customer_name, policies.policy_name
+FROM policy_holders
+JOIN customer ON policy_holders.customer_id = customer.customer_id
+JOIN policies ON policy_holders.policy_id = policies.policy_id;
+
+CREATE TABLE policy_holders (
+holder_id INT,
+customer_id INT,
+policy_id INT,
+start_date DATE,
+status VARCHAR(50)
+);
+
+INSERT INTO policy_holders VALUES (1,1,1012345,DATE '2023-01-10','Active');
+
+INSERT INTO policy_holders VALUES (2,2,1012346,DATE '2022-05-12','Active');
+
+INSERT INTO policy_holders VALUES (3,3,1012347,DATE '2023-07-15','Inactive');
+
+INSERT INTO policy_holders VALUES (4,4,1012348,DATE '2024-02-20','Active');
+
+INSERT INTO policy_holders VALUES (5,5,1012349,DATE '2023-03-18','Active');
+
+SELECT customer.customer_name, policies.policy_name
+FROM policy_holders
+JOIN customer ON policy_holders.customer_id = customer.customer_id
+JOIN policies ON policy_holders.policy_id = policies.policy_id;
+
+SELECT c.customer_name, p.policy_name, ph.status
+FROM policy_holders ph
+JOIN customer c ON ph.customer_id = c.customer_id
+JOIN policies p ON ph.policy_id = p.policy_id;
+
+select policy_type,count(*)
+from policies
+group by policy_type
+
+select avg(premium_amount)
+from policies;
